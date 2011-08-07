@@ -1,0 +1,4 @@
+HotCocoa::Application::Specification.new do |s|
+  s.name = "Empty"
+  s.type = "BNDL"
+end
