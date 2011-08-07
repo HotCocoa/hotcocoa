@@ -189,23 +189,27 @@ module HotCocoa
 
       # @endgroup
 
+      DEFAULT_ATTRIBUTES = {
+        :plist       => {},
+        :sources     => [],
+        :resources   => [],
+        :data_models => [],
+        :gems        => [],
+        :type       => 'APPL',
+        :signature  => '????',
+        :version    => '1.0',
+        :stdlib     => true,
+        :agent      => false,
+        :overwrite  => false,
+        :embed_bs   => false
+      }
+
       def initialize
-        @plist       = {}
-        @sources     = []
-        @resources   = []
-        @data_models = []
-        @gems        = []
+        DEFAULT_ATTRIBUTES.each { |key, value| send "#{key}=", value }
 
         yield self if block_given?
 
-        @type       ||= 'APPL'
-        @signature  ||= '????'
-        @version    ||= '1.0'
         @identifier ||= "com.#{ENV['USER']}.#{@name}"
-        @agent      ||= false
-        @overwrite  ||= false
-        @stdlib     ||= true
-        @embed_bs   ||= false
 
         # go through plist and overwrite specific keys?
       end
