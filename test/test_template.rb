@@ -47,7 +47,7 @@ class TestHotCocoaTemplate < MiniTest::Unit::TestCase
     template.map! { |file| file.sub /^#{File.join(SOURCE_ROOT, 'template')}/, '' }
 
     copy = all_files_in(@dir)
-    copy.map!    { |file| file.sub /^#{@dir}/, '' }
+    copy.map!    { |file| file.sub @dir, '' }
     copy.reject! { |file| file.match /appspec/ } # appspec is a special case
 
     assert_empty copy - template
