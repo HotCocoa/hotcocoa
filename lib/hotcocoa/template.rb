@@ -42,6 +42,7 @@ class HotCocoa::Template
   def self.copy_to directory, app_name
     FileUtils.mkdir_p directory
 
+    company_name = ENV['USER'] || 'yourcompany'
     all_files_in(template_directory) do |file|
       short_name  = file.sub(/^#{template_directory}/, '')
       short_name.gsub! /__APPLICATION_NAME__/, app_name
@@ -54,6 +55,7 @@ class HotCocoa::Template
         File.open(destination, 'w') do |out|
           input = File.read(file)
           input.gsub! /__APPLICATION_NAME__/, app_name
+          input.gsub! /__COMPANY_NAME__/, company_name
           out.write input
         end
       end

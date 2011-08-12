@@ -1,8 +1,9 @@
 HotCocoa::Application::Specification.new do |s|
-  s.name      = 'Stopwatch'
-  s.sources   = Dir.glob('{lib,hotcocoa}*/**/*.rb')
-  s.resources = Dir.glob('resources/**/*.*')
-  s.agent     = true
-  s.overwrite = true
-  s.stdlib    = false
+  s.name       = 'Stopwatch'
+  s.identifier = 'nz.co.kearse.stopwatch'
+  s.sources    = Dir.glob('{lib,hotcocoa}*/**/*.rb')
+  s.resources  = Dir.glob('resources/**/*.*')
+  s.agent      = true
+  s.overwrite  = true
+  s.stdlib     = false
 end

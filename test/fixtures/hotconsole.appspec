@@ -1,8 +1,9 @@
 HotCocoa::Application::Specification.new do |s|
-  s.name      = 'HotConsole'
-  s.version   = '1.0'
-  s.icon      = 'resources/HotConsole.icns'
-  s.sources   = Dir.glob('lib/**/*.rb')
-  s.resources = Dir.glob('resources/**/*.*')
-  s.signature = 'girb'
+  s.name       = 'HotConsole'
+  s.identifier = 'com.vincentisambart.HotConsole'
+  s.version    = '1.0'
+  s.icon       = 'resources/HotConsole.icns'
+  s.sources    = Dir.glob('lib/**/*.rb')
+  s.resources  = Dir.glob('resources/**/*.*')
+  s.signature  = 'girb'
 end

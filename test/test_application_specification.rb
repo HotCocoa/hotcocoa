@@ -60,13 +60,15 @@ class TestApplicationSpecification < MiniTest::Unit::TestCase
     $stderr = err
   end
 
-  def test_identifier_has_default
-    before, ENV['USER'] = ENV['USER'], 'blah'
-    exception = nil
-    spec      = Specification.new { |s| s.name = 'test' }
-    assert_equal 'com.blah.test', spec.identifier
-  ensure
-    ENV['USER'] = before
+  def test_identifier_is_verified
+    exception = rescue_spec_error_for { |s| s.name = 'test' }
+    assert_match /identifier is required/, exception.message
+
+    exception = rescue_spec_error_for do |s|
+      s.name       = 'test'
+      s.identifier = ''
+    end
+    assert_match /cannot be an empty string/, exception.message
   end
 
   def test_identifier_limits_character_set
@@ -86,26 +88,34 @@ class TestApplicationSpecification < MiniTest::Unit::TestCase
   end
 
   def test_version_defaults_to_1_if_not_set
-    spec = Specification.new { |s| s.name = 'test' }
+    spec = Specification.new do |s|
+      s.name       = 'test'
+      s.identifier = 'com.test.test'
+    end
     assert_equal '1.0', spec.version
   end
 
   def test_version_is_forced_to_a_string
     spec = Specification.new do |s|
-      s.name    = 'test'
-      s.version = 3.1415
+      s.name       = 'test'
+      s.identifier = 'com.test.test'
+      s.version    = 3.1415
     end
     assert_equal '3.1415', spec.version
   end
 
   def test_short_version_is_empty_by_default
-    spec = Specification.new { |s| s.name = 'test' }
+    spec = Specification.new do |s|
+      s.name       = 'test'
+      s.identifier = 'com.test.test'
+    end
     assert_nil spec.short_version
   end
 
   def test_short_version_is_forced_to_a_string_if_defined
     spec = Specification.new do |s|
-      s.name = 'test'
+      s.name          = 'test'
+      s.identifier    = 'com.test.test'
       s.short_version = 3.1415
     end
     assert_equal '3.1415', spec.short_version

@@ -28,8 +28,6 @@ module Application
     ##
     # The app's unique identifier, in reverse DNS form. Required.
     #
-    # Defaults to `'com.#{ENV['USER']}.#{@name}'`
-    #
     # @example Identifier for Mail.app
     #   'com.apple.mail'
     #
@@ -219,8 +217,6 @@ module Application
 
       yield self if block_given?
 
-      @identifier ||= "com.#{ENV['USER']}.#{@name}"
-
       # go through plist and overwrite specific keys?
 
       verify!
@@ -256,8 +252,9 @@ module Application
 
     # @todo Should we try to make the regexp more strict?
     def verify_identifier
-      raise Error, 'a bundle identifier is required' unless @identifier
+      raise Error, 'a bundle identifier is required for an appspec' unless @identifier
       @identifier = @identifier.to_s
+      raise Error, 'a bundle identifier cannot be an empty string' if @identifier.empty?
       unless @identifier.match /^[A-Za-z0-9\.-]+$/
         raise Error, 'A bundle identifier may only use "-", ".", and alphanumeric characters.' +
           "You had #{@identifier.inspect}"

@@ -1,6 +1,6 @@
 Application::Specification.new do |s|
   s.name       = '__APPLICATION_NAME__'
-  s.identifier = 'com.yourcompany.__APPLICATION_NAME__'
+  s.identifier = 'com.__COMPANY_NAME__.__APPLICATION_NAME__'
   s.version    = '1.0'
   s.icon       = 'resources/HotCocoa.icns'
   s.resources  = Dir.glob('resources/**/*.*')

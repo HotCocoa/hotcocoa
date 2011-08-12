@@ -1,6 +1,7 @@
 HotCocoa::Application::Specification.new do |s|
-  s.name    = 'Calculator'
-  s.version = '2.0'
-  s.icon    = '/Applications/Calculator.app/Contents/Resources/Calculator.icns'
-  s.sources = Dir.glob('lib/**/*.rb')
+  s.name       = 'Calculator'
+  s.identifier = 'com.elevenworks.Calculator'
+  s.version    = '2.0'
+  s.icon       = '/Applications/Calculator.app/Contents/Resources/Calculator.icns'
+  s.sources    = Dir.glob('lib/**/*.rb')
 end
