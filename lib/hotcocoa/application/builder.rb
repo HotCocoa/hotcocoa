@@ -73,7 +73,7 @@ module Application
     def write_bundle_files
       write_pkg_info_file
       write_info_plist_file
-      build_executable unless File.exist?(File.join(macos_root, objective_c_executable_file))
+      build_executable unless File.exist?(executable_file)
       write_ruby_main
     end
 
@@ -121,7 +121,7 @@ module Application
         CFBundleVersion:               spec.version,
         CFBundlePackageType:           spec.type,
         CFBundleSignature:             spec.signature,
-        CFBundleExecutable:            objective_c_executable_file,
+        CFBundleExecutable:            executable_file_name,
         CFBundleDevelopmentRegion:     'English',
         CFBundleInfoDictionaryVersion: '6.0',
         NSPrincipalClass:              'NSApplication',
@@ -146,7 +146,7 @@ module Application
         }
       end
       Dir.chdir(macos_root) do
-        puts `gcc main.m -o #{objective_c_executable_file} -arch x86_64 -framework MacRuby -framework Foundation -fobjc-gc-only`
+        puts `gcc main.m -o #{executable_file_name} -arch x86_64 -framework MacRuby -framework Foundation -fobjc-gc-only`
       end
       File.unlink(objective_c_source_file)
     end
@@ -206,8 +206,12 @@ module Application
       File.join(contents_root, 'PkgInfo')
     end
 
-    def objective_c_executable_file
+    def executable_file_name
       spec.name.gsub(/\s+/, '')
+    end
+
+    def executable_file
+      File.join(macos_root, executable_file_name)
     end
 
     def objective_c_source_file
