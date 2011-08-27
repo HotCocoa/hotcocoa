@@ -1,27 +1,26 @@
 require 'rubygems'
 require 'hotcocoa/application/builder'
 
-spec = Application::Specification.load '__APPLICATION_NAME__.appspec'
+builder = Application::Builder.new '__APPLICATION_NAME__.appspec'
 
 desc 'Build the application'
 task :build do
-  Application::Builder.build spec
+  builder.build
 end
 
 desc 'Build a deployable version of the application'
 task :deploy do
-  Application::Builder.build spec, deploy: true
+  builder.build deploy: true
 end
 
 desc 'Build and execute the application'
 task :run => [:build] do
-  `"./#{spec.name}.app/Contents/MacOS/#{spec.name.gsub(/ /, '')}"`
+  builder.run
 end
 
 desc 'Cleanup build files'
 task :clean do
-  $stdout.puts "/bin/rm -rf '#{spec.name}.app'"
-  sh "/bin/rm -rf '#{spec.name}.app'"
+  builder.remove_bundle_root
 end
 
 task :default => [:run]
