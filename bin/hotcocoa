@@ -28,7 +28,9 @@ else
   file_to_copy = nil
 end
 
-pretty_project_name = project_name.split('_').collect(&:capitalize).join(' ')
+pretty_project_name = project_name.split(/[^a-zA-Z0-9]/).collect do |name|
+  name.sub(/./) { |character| character.upcase } 
+end.join
 HotCocoa::Template.new(project_name, pretty_project_name).copy!
 
 if file_to_copy

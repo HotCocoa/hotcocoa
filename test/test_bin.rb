@@ -37,10 +37,26 @@ class TestHotCocoaBinaryUsesTemplate < TestHotCocoaBinary
   end
 
   def test_uses_given_name
-    app_name = 'The answer life, the universe, and everything'
+    app_name = 'The answer to life, the universe, and everything'
     Dir.chdir(@dir) do
       hotcocoa app_name.inspect
       assert Dir.exists? app_name
+    end
+  end
+
+  def test_uses_camel_case_name_for_appspec
+    app_name = 'CamelCase'
+    Dir.chdir(@dir) do
+      hotcocoa app_name.inspect
+      assert Dir.new(app_name).entries.include? "#{app_name}.appspec"
+    end
+  end
+
+  def test_converts_non_alphanumeric_characters_to_camelcase
+    app_name = 'The answer to life, the universe, and everything'
+    Dir.chdir(@dir) do
+      hotcocoa app_name.inspect
+      assert Dir.new(app_name).entries.include? "TheAnswerToLifeTheUniverseAndEverything.appspec"
     end
   end
 
