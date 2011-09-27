@@ -61,16 +61,16 @@ HotCocoa::Mappings.map table_view: NSTableView do
       if target && (
           target.instance_variable_get(:@action_behavior) ||
             target.instance_variable_get(:@double_action_behavior))
-        object.instance_variable_set :@double_action_behavior, behavior
-        object = target
+        @object.instance_variable_set :@double_action_behavior, behavior
+        @object = target
 
       else
-        object = Object.new
-        object.instance_variable_set :@double_action_behavior, behavior
+        @object = Object.new
+        @object.instance_variable_set :@double_action_behavior, behavior
         setTarget object
       end
 
-      def object.perform_double_action sender
+      def @object.perform_double_action sender
         @double_action_behavior.call sender
       end
 
