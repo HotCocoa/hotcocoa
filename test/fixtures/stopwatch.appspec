@@ -6,4 +6,5 @@ HotCocoa::Application::Specification.new do |s|
   s.agent      = true
   s.overwrite  = true
   s.stdlib     = false
+  s.gems       = [ 'rest-client' ]
 end

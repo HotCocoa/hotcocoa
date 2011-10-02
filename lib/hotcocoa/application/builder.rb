@@ -64,13 +64,16 @@ module Application
     ##
     # Build arguments list and call to `macruby_deploy`.
     def deploy
+      puts `macruby_deploy --embed --gem hotcocoa #{deploy_options} #{bundle_root}`
+    end
+
+    def deploy_options
       options = []
-      spec.gems.each { |g| options << "--gem #{g.name}" }
+      spec.gems.each { |g| options << "--gem #{g}" }
       options << '--bs'        if spec.embed_bs?
       options << '--compile'   if spec.compile?
       options << '--no-stdlib' unless spec.stdlib # @todo use attribute properly
-      options = options.join(' ')
-      puts `macruby_deploy --embed --gem hotcocoa #{options} #{bundle_root}`
+      options.join(' ')
     end
 
     def build_bundle_structure

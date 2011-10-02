@@ -18,4 +18,11 @@ class TestApplicationBuilder < MiniTest::Unit::TestCase
     assert_equal spec, builder.spec
   end
 
+  def test_deploy_options
+    spec = Specification.load STOPWATCH
+    builder = Builder.new spec
+    options = builder.send :deploy_options
+    assert options.include? "--gem rest-client"
+  end
+
 end
