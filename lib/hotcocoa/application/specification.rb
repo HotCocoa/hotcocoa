@@ -154,7 +154,7 @@ module Application
     # @return [Array<String>]
     attr_accessor :data_models
 
-    # @group Deloyment Options
+    # @group Deployment Options
 
     ##
     # Whether to include the Ruby stdlib in the app when embedding
