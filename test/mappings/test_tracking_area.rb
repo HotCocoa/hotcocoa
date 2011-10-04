@@ -12,7 +12,7 @@ class TestTrackingAreaMappings < MiniTest::Unit::TestCase
 
   def bench_create_tracking_area
     assert_performance_linear do |n|
-      n.times { HotCocoa.tracking_area }
+      n.times { HotCocoa.tracking_area(options: [:mouse_entered_and_exited, :active_first_responder]) }
     end
   end
 end

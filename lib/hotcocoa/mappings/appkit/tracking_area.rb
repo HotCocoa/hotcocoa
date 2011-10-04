@@ -16,8 +16,12 @@ HotCocoa::Mappings.map tracking_area: NSTrackingArea do
   
   def init_with_options tracking_area, options
     rect = options.delete(:rect)
+    widget_options = options.delete(:options)
+    if widget_options.nil?
+      raise ArgumentError.new("Options must be set for NSTrackingArea, in particular the type of tracking area")
+    end
     tracking_area.initWithRect rect,
-                      options: options.delete(:options),
+                      options: widget_options,
                         owner: options.delete(:owner),
                      userInfo: nil
   end
