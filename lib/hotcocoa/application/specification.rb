@@ -254,24 +254,8 @@ module Application
 
     # @endgroup
 
-    DEFAULT_ATTRIBUTES = {
-      plist:       {},
-      sources:     [],
-      resources:   [],
-      data_models: [],
-      gems:        [],
-      type:        'APPL',
-      signature:   '????',
-      version:     '1.0',
-      stdlib:      true,
-      agent:       false,
-      compile:     true,
-      overwrite:   false,
-      embed_bs:    false
-    }
-
     def initialize
-      DEFAULT_ATTRIBUTES.each { |key, value| send "#{key}=", value }
+      default_attributes.each { |key, value| send "#{key}=", value }
 
       unless block_given?
         msg = 'You must pass a block at initialization to setup the specification'
@@ -305,6 +289,23 @@ module Application
 
 
     private
+    def default_attributes
+      {
+        plist:       {},
+        sources:     [],
+        resources:   [],
+        data_models: [],
+        gems:        [],
+        type:        'APPL',
+        signature:   '????',
+        version:     '1.0',
+        stdlib:      true,
+        agent:       false,
+        compile:     true,
+        overwrite:   false,
+        embed_bs:    false
+      }
+    end
 
     def verify_name
       raise Error, 'a name is required for an appspec' unless @name

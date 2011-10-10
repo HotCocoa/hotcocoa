@@ -244,6 +244,13 @@ class TestApplicationSpecification < TestApplicationModule
     assert spec.icon_exists?
   end
 
+  def test_defaults_are_immutable
+    first_spec = minimal_spec {|s| s.sources << ["/path/to/source"]}
+    
+    second_spec = minimal_spec
+    assert_empty second_spec.sources
+  end
+
   # doubles as an integration test
   def test_load_evaluates_files_properly
     spec = hotconsole_spec
@@ -263,5 +270,4 @@ class TestApplicationSpecification < TestApplicationModule
     assert_equal true,                                spec.overwrite
     assert_equal false,                               spec.stdlib
   end
-
 end
