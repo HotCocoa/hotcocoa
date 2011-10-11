@@ -38,5 +38,15 @@ Application::Specification.new do |s|
   # You can use this flag to hide the dock icon for the app; the
   # default value is false so that apps will have a dock icon
   # s.agent    = true
+
+  # uncomment the block below to declare document types for your document-based application
+  # you can declare multiple document types by specifying several declare_doc_type blocks
+  # s.declare_doc_type do |doc_type|
+  #   doc_type.extensions = ["ext"]
+  #   doc_type.icon       = "MyIcon.icns"
+  #   doc_type.name       = "MyProjectDocument"
+  #   doc_type.role       = :viewer # one of [:editor, :viewer, :none]
+  #   doc_type.class      = "MyDocument"
+  # end
 end
 

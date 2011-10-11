@@ -186,6 +186,7 @@ module Application
         LSMinimumSystemVersion:        '10.6.7', # @todo should match MacRuby
       }
       info[:CFBundleIconFile] = File.basename(spec.icon) if spec.icon_exists?
+      info[:CFBundleDocumentTypes] = spec.doc_types.map(&:info_plist_representation) unless spec.doc_types.empty?
       info.merge! spec.plist # should always be done last
       info.to_plist
     end

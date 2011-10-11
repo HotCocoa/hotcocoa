@@ -8,6 +8,7 @@ class TestApplicationSpecification < TestApplicationModule
     rescue Specification::Error => e
       return e
     end
+    flunk "no error thrown!"
   end
 
   def test_spec_requires_a_block
@@ -224,12 +225,36 @@ class TestApplicationSpecification < TestApplicationModule
     assert_equal true, spec.embed_bs
   end
 
-  def test_overwirte_attribute_is_false_by_default
+  def test_overwrite_attribute_is_false_by_default
     spec = minimal_spec
     refute spec.overwrite?
 
     spec = minimal_spec { |s| s.overwrite = true }
     assert spec.overwrite?
+  end
+
+  def test_doc_types_is_empty_by_default
+    assert_equal [], minimal_spec.doc_types
+  end
+
+  def test_doc_types_can_be_added
+    spec = minimal_spec do |s|
+      s.declare_doc_type do |doc_type|
+        doc_type.extensions = ["ext"]
+        doc_type.icon       = "MyIcon.icns"
+        doc_type.name       = "MyProjectDocument"
+        doc_type.role       = :viewer
+        doc_type.class      = "MyDocument"
+      end
+    end
+    assert 1, spec.doc_types.size
+  end
+
+  def test_doc_type_declaration_requires_a_block
+    exception = assert_raises ArgumentError do
+      minimal_spec {|s| s.declare_doc_type}
+    end
+    assert_match /must pass a block/, exception.message
   end
 
   def test_icon_exists?

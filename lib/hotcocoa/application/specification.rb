@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 require 'rubygems'
+require 'hotcocoa/application/document_type_specification'
 
 ##
 # Application is a namespace for the classes that are used to specify
@@ -114,9 +115,11 @@ module Application
     # @return [Boolean]
     attr_accessor :agent
 
-    # @todo CFBundleDocumentTypes
+    ##
+    # The list of document types supported by the application (for document-based applications only). Optional
+    #
     # @return [Array<Hash>]
-    # attr_accessor :doc_types
+    attr_accessor :doc_types
 
     ##
     # Any additional plist values that an application could have.
@@ -233,6 +236,23 @@ module Application
     alias_method :add_dependency, :add_runtime_dependency
 
     ##
+    # Declares a document type for your document-driven application.
+    # (see http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Documents/Tasks/ImplementingDocApp.html)
+    #
+    # @example
+    #
+    #  spec.declare_doc_type do |doc_type|
+    #    doc_type.extensions = ["ext"]
+    #    doc_type.icon       = "MyIcon.icns"
+    #    doc_type.name       = "MyProjectDocument"
+    #    doc_type.role       = :editor
+    #    doc_type.class      = "MyDocument"
+    #  end
+    def declare_doc_type(&block)
+      @doc_types << DocumentTypeSpecification.new(&block)
+    end
+
+    ##
     # Whether or not to embed BridgeSupport files when embedding the
     # MacRuby framework during deployment.
     #
@@ -296,6 +316,7 @@ module Application
         resources:   [],
         data_models: [],
         gems:        [],
+        doc_types:   [],
         type:        'APPL',
         signature:   '????',
         version:     '1.0',

@@ -68,4 +68,17 @@ class TestApplicationBuilder < TestApplicationModule
     assert_equal spec.identifier, plist[:CFBundleIdentifier]
   end
 
+  def test_plist_doctype_generated_if_present
+    spec = minimal_spec do |s|
+      s.declare_doc_type do |doc_type|
+        doc_type.extensions = ["ext"]
+        doc_type.icon       = "MyIcon.icns"
+        doc_type.name       = "MyProjectDocument"
+        doc_type.role       = :viewer
+        doc_type.class      = "MyDocument"
+      end
+    end
+    plist = load_plist(Builder.new(spec).send(:info_plist))
+    assert_equal 1, plist[:CFBundleDocumentTypes].size
+  end
 end
