@@ -7,6 +7,9 @@ STDOUT.reopen(IO.for_fd(NSFileHandle.fileHandleWithStandardError.fileDescriptor.
 # of complex Cocoa classes using DSL techniques.
 module HotCocoa; end
 
+# snow_leopard_check only passes if
+# BridgeSupport has been installed
+require 'hotcocoa/snow_leopard_check'
 require 'hotcocoa/version'
 
 # Load general HotCocoa stuff
