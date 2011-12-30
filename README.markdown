@@ -14,7 +14,7 @@ From rubygems:
 
 Or to get the bleeding edge, you can clone the repository on Github and install from there:
 
-    $ git clone git://github.com/ferrous26/hotcocoa
+    $ git clone git://github.com/HotCocoa/hotcocoa
     $ cd hotcocoa
     $ sudo macrake install
 
@@ -29,13 +29,13 @@ in order to run HotCocoa. Read about it on the
 
 ### Documentation
 
-The documentation can be found on [rdoc.info](http://rdoc.info/github/ferrous26/hotcocoa/master/frames).
+The documentation can be found on [rdoc.info](http://rdoc.info/github/HotCocoa/hotcocoa/master/frames).
 
 The most important pages are:
 
-* [the overview](http://rubydoc.info/github/ferrous26/hotcocoa/master/file/docs/Overview.markdown)
-* [a guide to the mappings](http://rubydoc.info/github/ferrous26/hotcocoa/master/file/docs/Mappings.markdown)
-* [troubleshooting](http://rubydoc.info/github/ferrous26/hotcocoa/master/file/docs/Troubleshooting.markdown)
+* [the overview](http://rubydoc.info/github/HotCocoa/hotcocoa/master/file/docs/Overview.markdown)
+* [a guide to the mappings](http://rubydoc.info/github/HotCocoa/hotcocoa/master/file/docs/Mappings.markdown)
+* [troubleshooting](http://rubydoc.info/github/HotCocoa/hotcocoa/master/file/docs/Troubleshooting.markdown)
 
 The documentation currently does not cover the shipped mappings right now due to the
 way that mappings are implemented; a YARD plug-in or new YARD features
@@ -43,7 +43,7 @@ will be needed (stay tuned).
 
 ### Examples
 
-Have a look in the [examples folder](https://github.com/ferrous26/hotcocoa/tree/master/examples) to see some sample apps which use HotCocoa.
+Have a look in the [examples folder](https://github.com/HotCocoa/hotcocoa/tree/master/examples) to see some sample apps which use HotCocoa.
 
 ## Contributing
 

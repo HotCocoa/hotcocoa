@@ -1,8 +1,8 @@
 *.app
 *.gem
-.yardoc
-Gemfile.lock
-.rvmrc
 *.rbo
 .DS_Store
-
+.rvmrc
+.yardoc
+Gemfile.lock
+pkg/**
