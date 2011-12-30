@@ -12,12 +12,14 @@ Gem::Specification.new do |s|
   s.licenses     = ['MIT']
   s.has_rdoc     = 'yard'
   s.bindir       = 'bin'
+  s.extensions   = ['ext/hotcocoa/extconf.rb']
   s.executables << 'hotcocoa'
 
   s.files            =
     ['Rakefile', '.yardopts', 'bin/hotcocoa'] +
     Dir.glob('lib/**/*.rb')   +
-    Dir.glob('template/**/*')
+    Dir.glob('template/**/*') +
+    Dir.glob('ext/**/*.{c,h,rb}')
 
   s.test_files       =
     Dir.glob('test/**/*.rb')
