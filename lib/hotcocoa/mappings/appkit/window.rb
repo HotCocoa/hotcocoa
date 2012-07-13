@@ -135,4 +135,8 @@ HotCocoa::Mappings.map window: NSWindow do
   delegating 'windowWillReturnUndoManager:',                            to: :returning_undo_manager
   delegating 'windowWillUseStandardFrame:defaultFrame:',                to: :will_use_standard_frame,  parameters: [:defaultFrame]
 
+  delegating 'windowWillEnterFullScreen:',                              to: :will_enter_full_screen
+  delegating 'windowDidEnterFullScreen:',                               to: :did_enter_full_screen
+  delegating 'windowWillExitFullScreen:',                               to: :will_exit_full_screen
+  delegating 'windowDidExitFullScreen:',                                to: :did_exit_full_screen
 end
