@@ -45,7 +45,7 @@ HotCocoa::Mappings.map view: NSView do
 
     def on_notification options = {}, &block
       options[:sent_by] = self
-      NotificationListener.new options, &block
+      HotCocoa::NotificationListener.new options, &block
     end
 
     def remove subview, options = {}
