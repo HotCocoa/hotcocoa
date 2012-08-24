@@ -60,7 +60,7 @@ module Application
     # Run the bundle's binary directly so `STDOUT` and `STDERR` appear in the
     # terminal.
     def run
-      `"./#{executable_file}"`
+      system "./#{executable_file}"
     end
 
     ##
@@ -75,7 +75,7 @@ module Application
     ##
     # Call `macruby_deploy` to lend a helping hand.
     def deploy
-      puts `macruby_deploy --embed --gem hotcocoa #{deploy_options} #{bundle_root}`
+      system "macruby_deploy --embed --gem hotcocoa #{deploy_options} #{bundle_root}"
     end
 
     ##
@@ -134,7 +134,7 @@ module Application
 
         if resource =~ /\.xib$/
           destination.gsub!(/.xib/, '.nib')
-          puts `ibtool --compile #{destination} #{resource}`
+          system "ibtool --compile #{destination} #{resource}"
         else
           FileUtils.cp_r resource, destination
         end
@@ -145,7 +145,7 @@ module Application
     # Compile any CoreData model files and copy them to the bundle.
     def compile_data_models
       spec.data_models.each do |data|
-        `/Developer/usr/bin/momc #{data} #{resources_root}/#{File.basename(data, ".xcdatamodel")}.mom`
+        system "/Developer/usr/bin/momc #{data} #{resources_root}/#{File.basename(data, ".xcdatamodel")}.mom"
       end
     end
 
@@ -220,7 +220,7 @@ module Application
         }
       end
       Dir.chdir(macos_root) do
-        puts `#{RbConfig::CONFIG['CC']} main.m -o #{executable_file_name} -arch x86_64 -framework MacRuby -framework Foundation -fobjc-gc-only`
+        system "#{RbConfig::CONFIG['CC']} main.m -o #{executable_file_name} -arch x86_64 -framework MacRuby -framework Foundation -fobjc-gc-only"
       end
       File.unlink(objective_c_source_file)
     end
